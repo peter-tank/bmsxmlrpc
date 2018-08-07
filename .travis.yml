@@ -1,13 +1,37 @@
 language: python
+
+matrix:
+  fast_finish: true
+  allow_failures:
+  - "nightly"
+  - "3.7-dev"
+  - "3.6-dev"
+
 python:
+ # currently points to 3.7-dev
+  - "nightly"
+  - "3.7-dev"
+  - "3.6-dev"
+  - "3.6"
+  - "3.5"
+  - "3.4"
   - "2.7"
-addons:
-  apt:
-    packages:
-      - build-essential
-      - libcap-dev
+
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-  - python setup.py install
+    - "pip install mock nose requests"
+    - "nosetests --verbosity=2 bmsxmlrpc"
+    - "pip install -e ."
+
 script:
-  - python checkdeps.py
-  - pybitmessage -t
+#/home/travis/build/peter-tank/bmsxmlrpc
+    - "pwd; mv -f ./bmsxmlrpc ./server/; cd ./server/"
+    - "pwd; mv -f ./bmsxmlrpc/services.py ./"
+    - "pwd; mv -f ./bmsxmlrpc/bitmessagemain.py ./"
+    - "pwd; mkdir -p /home/travis/.config/PyBitmessage/"
+    - "pwd; cat bmsxmlrpc/test_keys >/home/travis/.config/PyBitmessage/keys.dat"
+    - "pwd; echo 'api test...'; python bitmessagemain.py --apitest"
+#    - "pwd; echo 'main test...'; python bitmessagemain.py --test"
+#    - "ls -l /home/travis/.config/PyBitmessage/"
+#    - "ls -l /home/travis/.config/PyBitmessage/knownnodes.dat"
+#    - "cat /home/travis/.config/PyBitmessage/debug.log"

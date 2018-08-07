@@ -1,0 +1,3 @@
+[submodule "bmsxmlrpc/socks"]
+	path = bmsxmlrpc/socks
+	url = https://github.com/Anorov/PySocks

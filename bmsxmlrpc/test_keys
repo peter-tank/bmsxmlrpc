@@ -1,0 +1,8 @@
+[bitmessagesettings]
+settingsversion = 10
+apiport = 8442
+apiinterface = 127.0.0.1
+apiusername = xxx
+apipassword = xxx
+daemon = false
+socksproxytype = none

@@ -1,0 +1,4 @@
+include COPYING
+include README.md
+recursive-include desktop *
+recursive-exclude . *.pyc
